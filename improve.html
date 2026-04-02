@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Murray Bauman — Stranger Things</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0392b;
+    --dark-red: #7b0d0d;
+    --blood: #8b0000;
+    --glow: #ff2a2a;
+    --bg: #0a0000;
+    --card: #110505;
+    --text: #e8d5c4;
+    --muted: #9a7060;
+    --accent: #ff4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Special Elite', cursive;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* === ANIMATED BACKGROUND === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(120,0,0,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(80,0,0,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(100,0,0,0.15) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+    animation: bgPulse 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes bgPulse {
+    0%   { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+
+  /* Particle tentacles */
+  .particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--blood);
+    opacity: 0;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: 0.4; }
+    90%  { opacity: 0.1; }
+    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+  }
+
+  /* === HEADER === */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 2px solid var(--dark-red);
+    background: linear-gradient(180deg, rgba(80,0,0,0.4) 0%, transparent 100%);
+  }
+
+  .st-logo {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    letter-spacing: 0.3em;
+    color: #fff;
+    text-shadow:
+      0 0 10px var(--glow),
+      0 0 30px var(--red),
+      0 0 60px var(--dark-red),
+      3px 3px 0 var(--blood);
+    text-transform: uppercase;
+    animation: flicker 4s ease-in-out infinite;
+  }
+
+  @keyframes flicker {
+    0%,19%,21%,23%,25%,54%,56%,100% {
+      text-shadow: 0 0 10px var(--glow), 0 0 30px var(--red), 0 0 60px var(--dark-red), 3px 3px 0 var(--blood);
+    }
+    20%,22%,24%,55% {
+      text-shadow: none;
+    }
+  }
+
+  .st-subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    color: var(--muted);
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  /* === MAIN LAYOUT === */
+  main {
+    position: relative;
+    z-index: 5;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* === PROFILE CARD === */
+  .profile-card {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    background: linear-gradient(135deg, rgba(30,5,5,0.95), rgba(10,0,0,0.95));
+    border: 1px solid var(--dark-red);
+    border-radius: 4px;
+    padding: 36px;
+    margin-bottom: 40px;
+    box-shadow:
+      0 0 40px rgba(139,0,0,0.3),
+      inset 0 1px 0 rgba(255,80,80,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red), transparent);
+    animation: scanLine 3s ease-in-out infinite;
+  }
+
+  @keyframes scanLine {
+    0%   { transform: scaleX(0); opacity: 0; }
+    50%  { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(0); opacity: 0; }
+  }
+
+  .portrait-wrap {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .portrait-frame {
+    width: 160px;
+    height: 200px;
+    background: linear-gradient(160deg, #1a0505, #0d0000);
+    border: 2px solid var(--dark-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 20px rgba(139,0,0,0.5);
+  }
+
+  .portrait-frame::after {
+    content: 'MURRAY BAUMAN';
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .portrait-placeholder {
+    font-size: 5rem;
+    opacity: 0.6;
+  }
+
+  .profile-info h1 {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff;
+    text-shadow: 0 0 20px var(--red), 2px 2px 0 var(--blood);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .profile-tag {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    border: 1px solid var(--dark-red);
+    padding: 3px 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    background: rgba(139,0,0,0.15);
+  }
+
+  .profile-info p {
+    line-height: 1.8;
+    color: var(--text);
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  /* === SECTION CARDS === */
+  .section {
+    background: linear-gradient(135deg, rgba(20,3,3,0.9), rgba(8,0,0,0.9));
+    border: 1px solid rgba(139,0,0,0.4);
+    border-left: 3px solid var(--red);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    border-radius: 2px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .section:hover {
+    border-left-color: var(--glow);
+    box-shadow: 0 0 30px rgba(192,57,43,0.2);
+  }
+
+  .section-title {
+    font-family: 'Creepster', cursive;
+    font-size: 1.6rem;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-shadow: 0 0 10px rgba(192,57,43,0.5);
+  }
+
+  .section-title::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red);
+  }
+
+  /* === ABILITIES LIST === */
+  ul.abilities {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  ul.abilities li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.85;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(139,0,0,0.2);
+  }
+
+  ul.abilities li::before {
+    content: '▸';
+    color: var(--red);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* === KEY EVENTS LIST === */
+  ol.events {
+    list-style: none;
+    counter-reset: event;
+  }
+
+  ol.events li {
+    counter-increment: event;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(139,0,0,0.2);
+    font-size: 0.92rem;
+    color: var(--text);
+    opacity: 0.85;
+  }
+
+  ol.events li::before {
+    content: counter(event, decimal-leading-zero);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    color: var(--red);
+    opacity: 0.7;
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  /* === TABLE === */
+  .seasons-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .seasons-table th {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--dark-red);
+    background: rgba(139,0,0,0.1);
+  }
+
+  .seasons-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(139,0,0,0.15);
+    color: var(--text);
+    opacity: 0.85;
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  .seasons-table tr:hover td {
+    background: rgba(139,0,0,0.08);
+    opacity: 1;
+  }
+
+  .season-badge {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* === LINKS === */
+  .links-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid var(--dark-red);
+    background: rgba(139,0,0,0.15);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--red);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+
+  .btn-link:hover {
+    color: #fff;
+    border-color: var(--red);
+    box-shadow: 0 0 20px rgba(192,57,43,0.4);
+  }
+
+  .btn-link:hover::before { transform: translateX(0); }
+
+  .back-link {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .back-link:hover { color: var(--red); border-bottom-color: var(--red); }
+
+  /* === FORM === */
+  .contact-form {
+    display: grid;
+    gap: 18px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: rgba(5,0,0,0.8);
+    border: 1px solid rgba(139,0,0,0.5);
+    color: var(--text);
+    font-family: 'Special Elite', cursive;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    border-radius: 2px;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 15px rgba(192,57,43,0.2);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .btn-submit {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, var(--blood), var(--dark-red));
+    border: 1px solid var(--red);
+    padding: 14px 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-self: flex-start;
+    box-shadow: 0 0 15px rgba(139,0,0,0.3);
+  }
+
+  .btn-submit:hover {
+    background: var(--red);
+    box-shadow: 0 0 30px rgba(192,57,43,0.5);
+    transform: translateY(-1px);
+  }
+
+  /* === FOOTER === */
+  footer {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(139,0,0,0.3);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(154,112,96,0.4);
+    text-transform: uppercase;
+  }
+
+  /* === CORNER DECORATIONS === */
+  .corner-deco {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+    opacity: 0.25;
+  }
+  .corner-deco.tl { top: 10px; left: 10px; border-top: 2px solid var(--red); border-left: 2px solid var(--red); }
+  .corner-deco.tr { top: 10px; right: 10px; border-top: 2px solid var(--red); border-right: 2px solid var(--red); }
+  .corner-deco.bl { bottom: 10px; left: 10px; border-bottom: 2px solid var(--red); border-left: 2px solid var(--red); }
+  .corner-deco.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--red); border-right: 2px solid var(--red); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .profile-card { flex-direction: column; }
+    ul.abilities { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .portrait-frame { width: 120px; height: 150px; }
+  }
+   .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+</head>
+<body>
+
+<!-- Corner decorations -->
+<div class="corner-deco tl"></div>
+<div class="corner-deco tr"></div>
+<div class="corner-deco bl"></div>
+<div class="corner-deco br"></div>
+
+<!-- Floating particles -->
+<div class="particles" id="particles"></div>
+
+<header id="top">
+  <div class="st-logo">Stranger Things</div>
+  <div class="st-subtitle">Character Profile — Season 2–4</div>
+</header>
+
+<main>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <div class="portrait-wrap">
+      <div class="portrait-frame">
+  <img src="Murray Bauman.png" alt="Murray Bauman" class="portrait-img">
+</div>
+    </div>
+    <div class="profile-info">
+      <h1>Murray Bauman</h1>
+      <div class="profile-tag">Private Investigator · Conspiracy Theorist</div>
+      <p>
+        Murray Bauman is a character from the TV series Stranger Things — a sharp-tongued private investigator
+        who lives alone and trusts no one, especially the government. He believes secret organizations
+        have been hiding the truth for decades. Though eccentric and abrasive, his intellect and skills
+        prove invaluable to the group. He speaks Russian fluently and becomes a critical ally to Hopper,
+        Joyce, Nancy, and Jonathan across multiple seasons.
+      </p>
+    </div>
+  </div>
+
+  <!-- Role -->
+  <div class="section">
+    <h2 class="section-title">Role in the Story</h2>
+    <p style="line-height:1.9; font-size:0.95rem; opacity:0.85;">
+      Murray Bauman plays an important supporting role in Stranger Things. He helps the main characters
+      understand the secret activities connected with the Hawkins laboratory. Murray investigates strange
+      events and believes the government hides the truth. He helps Nancy Wheeler and Jonathan Byers expose
+      the conspiracy, later becoming an ally of Jim Hopper and Joyce Byers. Because he speaks Russian,
+      he helps translate information about the Russian base. Murray also provides comic relief with his
+      sarcastic personality — and always manages to show up exactly when the team needs him most.
+    </p>
+  </div>
+
+  <!-- Abilities -->
+  <div class="section">
+    <h2 class="section-title">Abilities</h2>
+    <ul class="abilities">
+      <li>Investigative skills</li>
+      <li>Conspiracy knowledge</li>
+      <li>Research and hacking</li>
+      <li>Journalistic skills – exposes truth</li>
+      <li>Russian language fluency</li>
+      <li>Intelligent and resourceful</li>
+    </ul>
+  </div>
+
+  <!-- Key Events -->
+  <div class="section">
+    <h2 class="section-title">Key Events</h2>
+    <ol class="events">
+      <li>Helps Nancy and Jonathan investigate Hawkins Lab</li>
+      <li>Exposes secret government experiments to the public</li>
+      <li>Becomes a trusted ally of Jim Hopper and Joyce Byers</li>
+      <li>Supports the main characters in critical missions throughout Seasons 2–4</li>
+      <li>Assists in stopping dangerous conspiracies threatening Hawkins</li>
+    </ol>
+  </div>
+
+  <!-- Seasons Table -->
+  <div class="section">
+    <h2 class="section-title">Seasons Overview</h2>
+    <table class="seasons-table">
+      <thead>
+        <tr>
+          <th>Season</th>
+          <th>Important Event</th>
+          <th>Outcome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="season-badge">Season 2</span></td>
+          <td>Investigates Hawkins Lab secrets with Nancy and Jonathan</td>
+          <td>Reveals hidden experiments to the world</td>
+        </tr>
+        <tr>
+          <td><span class="season-badge">Season 3</span></td>
+          <td>Helps Hopper and Joyce uncover Russian activity beneath Hawkins</td>
+          <td>Provides critical intelligence on the secret base</td>
+        </tr>
+        <tr>
+          <td><span class="season-badge">Season 4</span></td>
+          <td>Translates Russian messages and aids the mission abroad</td>
+          <td>Supports the team in stopping Vecna's threat</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Links -->
+  <div class="section">
+    <h2 class="section-title">Learn More</h2>
+    <div class="links-row">
+      <a class="btn-link" href="https://strangerthings.fandom.com/wiki/Murray_Bauman" target="_blank">
+        ↗ Stranger Things Wiki
+      </a>
+      <a class="back-link" href="#top">↑ Back to top</a>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="section">
+    <h2 class="section-title">Send a Message to Murray</h2>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name..." required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="He's already listening..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Transmit Message ▸</button>
+    </form>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2025 &nbsp;·&nbsp; Stranger Things Fan Page &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; The Upside Down is watching
+</footer>
+
+<script>
+  // Generate floating particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 6 + 2;
+    p.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 12 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // Form submit handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ Message Received';
+    btn.style.background = 'rgba(0,80,0,0.5)';
+    btn.style.borderColor = '#0f0';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Transmit Message ▸';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
