@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Card</title>
+	<style>
+
+	</style>
+	<link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+/* --- Header Block Start  --- */
+			<h1>Profile Card</h1>
+			<div class="profile-picture">
+				<img src="john-doe.jpg" alt="Profile Picture">
+			</div>
+			<h2>John Doe</h2>
+			<hr/>
+/* --- Primary Navigation Block Start  --- */
+			<div class="primary__nav">
+				<a href="#about">About</a> |
+				<a href="#skills">Skills</a> |
+				<a href="#social">Social</a> |
+				<a href="#edu">Education</a> |
+				<a href="#exper">Experience</a> |
+				<a href="#contact">Contacts</a>
+			</div>
+/* --- Primary Navigation Block End  --- */
+			<hr/>
+/* --- Header Block End  --- */
+/* --- Main Container Start  --- */
+/* --- About Section Start  --- */
+			<div class="about-box" id="about">
+				<h3>About</h3>
+				<h4>Software Engineer</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus a erat vitae maximus. Phasellus pellentesque accumsan erat eget accumsan. Aenean eget placerat lorem. Suspendisse vitae dictum nisl. Curabitur cursus libero ornare tellus mattis, nec vehicula nunc ullamcorper. Mauris ut bibendum urna. Vestibulum in dui justo. Morbi ultrices vitae purus et mattis.</p>
+				<ul>
+					<li><strong>Email:</strong> john.doe@example.com</li>
+					<li><strong>Phone:</strong> +1234567890</li>
+					<li><strong>Location:</strong> Lutsk, Ukraine</li>
+				</ul>
+			</div>
+/* --- About Section End  --- */
+/* --- Skills Section Start  --- */
+			<div class="skills-box" id="skills">
+				<h3>Skills</h3>
+				<ul>
+					<li><span class="">HTML</span> - Senior Developer (10 years)</li>
+					<li><span class="">CSS</span> - Senior Developer (10 years)</li>
+					<li><span class="">Java Script</span> - Middle Developer (4 years)</li>
+					<li><span class="">Python</span> - Middle Developer (5 years)</li>
+					<li><span class="">Java</span> - Junior Developer (1 years)</li>
+				</ul>
+			</div>
+/* --- Skills Section End  --- */
+/* --- Social Section Start  --- */
+			<div class="social-box" id="social">
+			<h3>Social Media</h3>
+				<ol>
+					<li><a href="https://www.linkedin.com/in/johndoe" target="_blank">LinkedIn</a></li>
+					<li><a href="https://twitter.com/johndoe" target="_blank">Twitter</a></li>
+					<li><a href="https://github.com/johndoe" target="_blank">GitHub</a></li>
+				</ol>
+			</div>
+/* --- Social Section End  --- */
+/* --- Education Section Start  --- */
+			<div class="edu-box" id="edu">
+				<h3>Education</h3>
+				<table>
+					<thead>
+						<tr class="theader">
+							<th>
+								Degree
+							</th>
+							<th>
+								University
+							</th>
+							<th>
+								Years
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="light">
+							<td>
+								Master's Degree in Computer Science & IT
+							</td>
+							<td>
+								University of ABC
+							</td>
+							<td>
+								2022-2024
+							</td>
+						</tr>
+						<tr class="dark">
+							<td>
+								Bachelor's Degree in Computer Science
+							</td>
+							<td>
+								University of KLM
+							</td>
+							<td>
+								2018-2022
+							</td>
+						</tr>
+						<tr class="light">
+							<td>
+								Associate degree
+							</td>
+							<td>
+								College of OPQ
+							</td>
+							<td>
+								2016-2018
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+/* --- Education Section End  --- */
+/* --- Experience Section Start  --- */
+			<div class="experience-box" id="exper">
+				<h3>Experience:</h3>
+				<ul>
+					<li>Software Engineer at Pear Company (2022-present)</li>
+					<li class="bestexpirience">Python Developer at Plum Company (2020-2022)</li>
+					<li>Junior Dev at NoName Company (2019-2020)</li>
+				</ul>
+			</div>
+/* --- Experience Section End  --- */
+
+/* --- Main Container End  --- */
+
+/* --- Footer Block Start  --- */
+		<div class="contact-box" id="contact">
+			<h3>Contact Me:</h3>
+			<form id="contact-form">
+				<label>Name:</label><br>
+				<input type="text" id="name" name="name" required><br>
+				<label>Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+				<label>Message:</label><br>
+				<textarea name="message" rows="4" required></textarea><br>
+				<button type="submit">Send</button>
+			</form>
+		</div>
+/* --- Footer Block End  --- */
+	</div>
+</body>
+</html>
