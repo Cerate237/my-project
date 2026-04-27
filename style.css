@@ -1,189 +1,82 @@
-/* ---------------- Common Styles ---------------- */
+/*
+  ========================================
+  General Styles
+  ========================================
+*/
+* {
+	box-sizing: border-box;
+}
 body {
-    font-family: Arial;
-    margin: 20px;
-    padding: 0;
-    color: #221c1c;
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
 }
-p {
-	font-size: 17px;
-	text-align: justify;
-	line-height: 1.2em
+section {
+	padding: 60px 0;
 }
+/*
+  ========================================
+  Typography
+  ========================================
+*/
 
-li {
-	font-size: 17px;
-	text-align: justify;
-	line-height: 1.2em
+h1, h2, h3, h4 {
+	font-weight: 600;
+	font-family: Arial;
+	text-align: center;
 }
 
 h1 {
-	font-size: 42px;
-	font-weight: 600;
-	font-family: Arial, sans-serif;
-    text-align: center;
-	color: rgb(74, 38, 150);
+	font-size: 2.6em;
 }
+
 h2 {
-	font-size: 35px;
-	font-weight: 600;
-	font-family: Arial, sans-serif;
-    text-align: center;
-	color: hsl(208, 58%, 17%);
+	font-size: 2em;
 }
+
 h3 {
-	font-size: 25px;
-	font-weight: 600;
-	font-family: Arial, sans-serif;
-	text-align: center;
-	color: #2c7480;
+	font-size: 1.4em;
 }
 
 h4 {
-	font-size: 18px;
-	font-weight: 600;
-	font-family: Arial, sans-serif;
-    margin-bottom: 0;
+	font-size: 1.2em;
 }
 
-img {
-    width: 300px;
-    height: 300px;
-}
-
-table {
-    margin: 0 auto;
-    border-collapse: collapse;
-	text-align: center;
-	font-size: 17px;
+p {
+	font-size: 1.1em;
 	font-family: Arial;
+	text-align: justify;
+	line-height: 1.4em;
+}
+/*
+  ========================================
+  Media
+  ========================================
+*/
+img, video {
+	max-width: 100%;
+	height: auto;
+}
+.bgdark {
+  background-color: #00a0e3;
+  background: radial-gradient(rgb(0,160,227, .9), rgb(255,255,255, 0.9));
+}  
+.bglight {
+  background-color: #f7f8f8;
 }
 
-th {
-    padding: 8px;
-    border: 1px solid black;
-    text-align: left;
-}
 
-td {
-    padding: 8px;
-    border: 1px solid black;
-    text-align: left;
-}
-
-form {
-    max-width: 400px;
-    margin: 0 auto;
-	font-size: 17px;
+/*
+  ========================================
+  Primary Navigation
+  ========================================
+*/
+/*
+ul li {
+	font-size: 1.2em;
 	font-family: Arial;
-	font-weight: 600;
-	border: 1px solid rgba(204, 204, 204, 0.699);
-	padding: 40px;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
 	text-align: center;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	display: inline-block;
+	margin: 0 5px 0 5px;
 }
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* ---------------- Main Container  ---------------- */
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 0;
-    background-color: #fafafa;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------------- Navigation  ---------------- */
-
-.primary__nav {
-    max-width: 430px;
-    margin: 0 auto;
-    padding: 10px 0px; 
-}
-
-.primary__nav a:hover {
-    color: red;
-    text-transform: uppercase;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/* ---------------- Images Styles  ---------------- */
-
-
-
-/* ---------------- Boxes Common Styles ---------------- */
-
-.about-box, .social-box, .experience-box, .skills-box, .edu-box, .contact-box  {
-    padding: 60px 40px;
-}
-
-
-
-/* ---------------- Skills Section ---------------- */
-
-
-
-.highlight {
-    font-weight: 600;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 20px;
-}
-
-.html, .css {
-    color: #fff;
-    background-color: #000;
-    padding: 5px;
-}
-
-.js, .py {
-    color: #fff;
-    background-color: #3554bb;
-    padding: 5px;
-}
-
-.java {
-    color: #fff;
-    background-color: #155010;
-    padding: 5px;
-}
-
-/* ---------------- Education Section ---------------- */
-
-
-
-/* ---------------- Expirience Section ---------------- */
-
-
-
-
-/* ---------------- Contact Section ---------------- */
-
-#contact-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+*/
