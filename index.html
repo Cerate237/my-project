@@ -1,481 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Lab 5 - CSS FlexBox</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="style.css" rel="stylesheet" type="text/css">
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itchy Feet - Travel Agency Lutsk</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ========================================
-       RESET & BASE
-    ======================================== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      color: #222;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-    section {
-      padding: 60px 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-    /* ========================================
-       TYPOGRAPHY
-    ======================================== */
-    h1, h2, h3, h4 {
-      font-weight: 600;
-      font-family: Arial;
-      text-align: center;
-    }
-    h1 { font-size: 2.6em; }
-    h2 { font-size: 2em; }
-    h3 { font-size: 1.4em; }
-    h4 { font-size: 1.2em; }
-    p  {
-      font-size: 1.1em;
-      font-family: Arial;
-      line-height: 1.6em;
-    }
+        /* ========== HEADER ========== */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    /* ========================================
-       CONTAINER
-    ======================================== */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        .topheader {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 20px;
+        }
 
-    /* ========================================
-       BACKGROUNDS
-    ======================================== */
-    .bgdark {
-      background: radial-gradient(ellipse at center, rgba(0,160,227,0.85), rgba(255,255,255,0.85));
-    }
-    .bglight {
-      background-color: #f7f8f8;
-    }
+        .topheader img.logo {
+            height: 70px;
+        }
 
-    /* ========================================
-       HEADER / NAV
-    ======================================== */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 30px;
-      border-bottom: 1px solid #eee;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+        .nav {
+            margin-left: auto;
+        }
 
-    .logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .logo .est {
-      font-size: 0.6em;
-      color: #888;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .logo .brand {
-      font-size: 2em;
-      font-weight: 900;
-      color: #1a2e5a;
-      letter-spacing: 1px;
-      line-height: 1;
-    }
-    .logo .brand span {
-      color: #e63b27;
-    }
-    .logo .tagline {
-      font-size: 0.55em;
-      color: #999;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
+        .nav ul {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            align-items: center;
+        }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 4px;
-      align-items: center;
-      justify-content: center;
-    }
-    nav ul li {
-      display: inline-flex;
-      align-items: center;
-    }
-    nav ul li a {
-      font-size: 1em;
-      color: #c8860a;
-      text-decoration: none;
-      padding: 4px 6px;
-    }
-    nav ul li a:hover {
-      text-decoration: underline;
-    }
-    nav ul li .sep {
-      color: #bbb;
-      margin: 0 2px;
-    }
+        .nav ul li + li::before {
+            content: "|";
+            color: #aaa;
+            margin-right: 5px;
+        }
 
-    /* ========================================
-       HERO
-       *** ЗАМІНИ 'hero.jpg' на ім'я свого файлу ***
-    ======================================== */
-    .hero {
-      position: relative;
-      width: 100%;
-      min-height: 260px;
-      background: url('hero.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(10, 30, 60, 0.55);
-    }
-    .hero h1 {
-      position: relative;
-      z-index: 1;
-      color: #fff;
-      font-size: 2.4em;
-      padding: 20px 30px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1em;
+        }
 
-    /* ========================================
-       ABOUT US
-    ======================================== */
-    .about-section {
-      padding: 60px 0;
-    }
-    .about-section h2 {
-      color: #1a2e5a;
-      margin-bottom: 30px;
-    }
-    .about-inner {
-      display: flex;
-      flex-direction: row;
-      gap: 30px;
-      align-items: flex-start;
-    }
-    .about-img {
-      flex: 0 0 40%;
-      max-width: 40%;
-    }
-    .about-img img {
-      width: 100%;
-      border-radius: 4px;
-    }
-    .about-text {
-      flex: 1;
-    }
-    .about-text p {
-      margin-bottom: 16px;
-      text-align: justify;
-      color: #1a2e5a;
-    }
+        .nav a:hover {
+            text-decoration: underline;
+        }
 
-    /* ========================================
-       WHERE TO GO
-    ======================================== */
-    .places-section {
-      background: #fff;
-    }
-    .places-section h2 {
-      margin-bottom: 30px;
-    }
-    .places-grid {
-      display: flex;
-      flex-direction: row;
-      gap: 24px;
-      justify-content: center;
-    }
-    .place-card {
-      flex: 1;
-      text-align: center;
-    }
-    .place-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    .place-card h4 {
-      margin-top: 12px;
-    }
+        /* ========== HERO ========== */
+        .hero {
+            height: 380px;
+            background: url("images/hero-lutsk.jpg") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
 
-    /* ========================================
-       REVIEWS
-    ======================================== */
-    .reviews-section {
-      padding: 60px 0;
-    }
-    .reviews-grid {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      justify-content: center;
-    }
-    .review-card {
-      flex: 1;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-    }
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .review-header h4 {
-      text-align: left;
-      font-size: 1em;
-    }
-    .stars {
-      color: #f0a500;
-      font-size: 1.1em;
-      margin-bottom: 10px;
-    }
-    .review-card p {
-      font-size: 0.92em;
-      text-align: left;
-    }
+        .hero h1 {
+            font-size: 2.6em;
+            font-weight: 700;
+            text-align: center;
+        }
 
-    /* Іконки соцмереж */
-    .icon-google {
-      font-size: 1.5em;
-      font-weight: 900;
-      color: #ea4335;
-    }
-    .icon-facebook {
-      background: #1877f2;
-      color: #fff;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1em;
-    }
-    .icon-yelp {
-      background: #d32323;
-      color: #fff;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1em;
-    }
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 60px 20px;
+        }
 
-    /* ========================================
-       FOOTER
-    ======================================== */
-    footer {
-      background: #333;
-      color: #ccc;
-      text-align: center;
-      padding: 18px 10px;
-      font-size: 0.85em;
-    }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
 
-    /* ========================================
-       MOBILE (max-width: 576px)
-    ======================================== */
-    @media only screen and (max-width: 576px) {
+        h2 {
+            font-size: 2em;
+            font-weight: 600;
+            text-align: center;
+            color: #3a7bd5;
+            margin-bottom: 30px;
+        }
 
-      header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
+        /* ========== ABOUT ========== */
+        .about {
+            background: radial-gradient(ellipse at center, rgba(0,160,227,0.55) 0%, rgba(230,245,255,0.85) 100%);
+        }
 
-      .hero h1 {
-        font-size: 1.6em;
-      }
+        .about-grid {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
 
-      .about-inner {
-        flex-direction: column;
-      }
-      .about-img {
-        flex: none;
-        max-width: 100%;
-        width: 100%;
-      }
+        .about-grid img {
+            width: 42%;
+            min-width: 220px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
 
-      .places-grid {
-        flex-direction: column;
-      }
-      .place-card img {
-        height: 220px;
-      }
+        .about-text {
+            flex: 1;
+        }
 
-      .reviews-grid {
-        flex-direction: column;
-      }
+        .about-text p {
+            font-size: 1.05em;
+            line-height: 1.7;
+            color: #fff;
+            text-align: justify;
+            margin-bottom: 14px;
+        }
 
-    }
+        .about-text p em {
+            font-style: italic;
+            font-weight: bold;
+        }
 
-  </style>
+        /* ========== WHERE TO GO ========== */
+        .destinations {
+            background: #fff;
+        }
+
+        .destinations h2 {
+            color: #333;
+        }
+
+        .dest-grid {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 240px;
+            max-width: 340px;
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .card h3 {
+            margin-top: 12px;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #222;
+        }
+
+        /* ========== REVIEWS ========== */
+        .reviews {
+            background: radial-gradient(ellipse at center, rgba(0,160,227,0.45) 0%, rgba(230,245,255,0.85) 100%);
+            padding: 50px 20px;
+        }
+
+        .reviews-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .review-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1;
+            min-width: 240px;
+            max-width: 320px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .review-header h4 {
+            font-size: 1em;
+            font-weight: bold;
+            text-align: left;
+            color: #222;
+        }
+
+        .review-logo {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .stars {
+            color: #f5a623;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .review-card p {
+            font-size: 0.92em;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: #2c2c2c;
+            color: #bbb;
+            text-align: center;
+            padding: 18px 20px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- ========== HEADER ========== -->
-  <header>
-    <div class="logo">
-      <span class="est">EST. 2010</span>
-      <span class="brand">ITCHY<br><span>FEET</span></span>
-      <span class="tagline">Travel Agency</span>
+<!-- HEADER -->
+<header class="header">
+    <div class="topheader">
+        <img class="logo" src="images/logo.png" alt="Itchy Feet Logo">
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Places</a></li>
+                <li><a href="#">Food</a></li>
+                <li><a href="#">Accommodation</a></li>
+                <li><a href="#">Contacts</a></li>
+            </ul>
+        </nav>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><span class="sep">|</span></li>
-        <li><a href="#">Places</a></li>
-        <li><span class="sep">|</span></li>
-        <li><a href="#">Food</a></li>
-        <li><span class="sep">|</span></li>
-        <li><a href="#">Accommodation</a></li>
-        <li><span class="sep">|</span></li>
-        <li><a href="#">Contacts</a></li>
-      </ul>
-    </nav>
-  </header>
+</header>
 
-  <!-- ========== HERO ==========
-       Фонове фото задається в CSS вище: url('hero.jpg')
-       Заміни hero.jpg на ім'я свого файлу з фото міста
-  -->
-  <div class="hero">
+<!-- HERO -->
+<section class="hero">
     <h1>Travel Agency "Itchy Feet"</h1>
-  </div>
+</section>
 
-  <!-- ========== ABOUT US ========== -->
-  <section class="about-section bgdark">
+<!-- ABOUT US -->
+<section class="about">
     <div class="container">
-      <h2>About Us</h2>
-      <div class="about-inner">
-
-        <div class="about-img">
-          <!-- *** ЗАМІНИ about.jpg на ім'я свого файлу *** -->
-          <img src="about.jpg" alt="Lutsk Castle">
+        <h2>About Us</h2>
+        <div class="about-grid">
+            <img src="images/about-lutsk-castle.jpg" alt="Lutsk Castle">
+            <div class="about-text">
+                <p>Established in 2010, <em>"Itchy Feet"</em> has grown to become a leading travel agent specialising in Lutsk. Along the way we have won a collection of tourism awards, including Travel Agent & Hotel Reservations Service of the Year in the 2019 and 2021 Product Review Awards.</p>
+                <p>There are a few things we're really proud of. Our trained consultants offer personal service to help you through the process, for a holiday that suits you. Specialising in complete holiday packages, our prices are some of the most competitive in the market with exclusive deals sourced from major industry partners.</p>
+                <p>Although we offer the convenience of an online service, experience has taught us that sometimes you just want a real person you can talk to. Enjoy the best of both worlds and book with confidence at "Itchy Feet".</p>
+            </div>
         </div>
-
-        <div class="about-text">
-          <p>Established in 2010, <em>"Itchy Feet"</em> has grown to become a leading travel agent
-            specialising in Lutsk. Along the way we have won a collection of tourism awards,
-            including Travel Agent &amp; Hotel Reservations Service of the Year in the 2019
-            and 2021 Product Review Awards.</p>
-          <p>There are a few things we're really proud of. Our trained consultants offer personal
-            service to help you through the process, for a holiday that suits you. Specialising in
-            complete holiday packages, our prices are some of the most competitive in the market
-            with exclusive deals sourced from major industry partners.</p>
-          <p>Although we offer the convenience of an online service, experience has taught us that
-            sometimes you just want a real person you can talk to. Enjoy the best of both worlds
-            and book with confidence at "Itchy Feet".</p>
-        </div>
-
-      </div>
     </div>
-  </section>
+</section>
 
-  <!-- ========== WHERE TO GO ========== -->
-  <section class="places-section bglight">
+<!-- WHERE TO GO -->
+<section class="destinations">
     <div class="container">
-      <h2>Where To Go</h2>
-      <div class="places-grid">
-
-        <div class="place-card">
-          <!-- *** ЗАМІНИ castle.jpg на ім'я свого файлу *** -->
-          <img src="castle.jpg" alt="Lutsk Castle">
-          <h4>Lutsk Castle</h4>
+        <h2>Where To Go</h2>
+        <div class="dest-grid">
+            <div class="card">
+                <img src="images/lutsk-castle.jpg" alt="Lutsk Castle">
+                <h3>Lutsk Castle</h3>
+            </div>
+            <div class="card">
+                <img src="images/volynyanka-tour.jpg" alt="Tour on Volynyanka">
+                <h3>Tour on Volynyanka</h3>
+            </div>
+            <div class="card">
+                <img src="images/dungeons.jpg" alt="Dungeons of Lutsk">
+                <h3>Dungeons of Lutsk</h3>
+            </div>
         </div>
-
-        <div class="place-card">
-          <!-- *** ЗАМІНИ volynyanka.jpg на ім'я свого файлу *** -->
-          <img src="volynyanka.jpg" alt="Tour on Volynyanka">
-          <h4>Tour on Volynyanka</h4>
-        </div>
-
-        <div class="place-card">
-          <!-- *** ЗАМІНИ dungeons.jpg на ім'я свого файлу *** -->
-          <img src="dungeons.jpg" alt="Dungeons of Lutsk">
-          <h4>Dungeons of Lutsk</h4>
-        </div>
-
-      </div>
     </div>
-  </section>
+</section>
 
-  <!-- ========== REVIEWS ========== -->
-  <section class="reviews-section bglight">
+<!-- REVIEWS -->
+<section class="reviews">
     <div class="container">
-      <div class="reviews-grid">
+        <div class="reviews-grid">
 
-        <div class="review-card">
-          <div class="review-header">
-            <h4>Miklosh Zdenek</h4>
-            <span class="icon-google">G</span>
-          </div>
-          <div class="stars">★★★★★</div>
-          <p>Excellent! Very good service from beginning to end. Even with a COVID-related delay
-            in the middle of it, Lisa stayed in contact with us and got us a reschedule with the
-            utmost of ease. Thank you!</p>
+            <div class="review-card">
+                <div class="review-header">
+                    <h4>Miklosh Zdenek</h4>
+                    <img class="review-logo" src="images/logo-google.webp" alt="Google">
+                </div>
+                <div class="stars">★★★★★</div>
+                <p>Excellent! Very good service from beginning to end. Even with a COVID-related delay in the middle of it, Lisa stayed in contact with us and got us a reschedule with the utmost of ease. Thank you!</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <h4>Daniel Saliba</h4>
+                    <img class="review-logo" src="images/logo-facebook.webp" alt="Facebook">
+                </div>
+                <div class="stars">★★★★★</div>
+                <p>Kristy was extremely helpful! Any questions we had were answered very quickly via email or phone call. Not my first time using travel online and definitely NOT my last!</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <h4>Trena Kennedy</h4>
+                    <img class="review-logo" src="images/logo-yelp.webp" alt="Yelp">
+                </div>
+                <div class="stars">★★★★★</div>
+                <p>Itchy Feet was a great company to deal with. Everything was very simple, professional and we were given all the information we required. Thank you for the great service!</p>
+            </div>
+
         </div>
-
-        <div class="review-card">
-          <div class="review-header">
-            <h4>Daniel Saliba</h4>
-            <span class="icon-facebook">f</span>
-          </div>
-          <div class="stars">★★★★★</div>
-          <p>Kristy was extremely helpful! Any questions we had were answered very quickly via
-            email or phone call. Not my first time using travel online and definitely NOT my last!</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-header">
-            <h4>Trena Kennedy</h4>
-            <span class="icon-yelp">★</span>
-          </div>
-          <div class="stars">★★★★★</div>
-          <p>Itchy Feet was a great company to deal with. Everything was very simple, professional
-            and we were given all the information we required. Thank you for the great service!</p>
-        </div>
-
-      </div>
     </div>
-  </section>
+</section>
 
-  <!-- ========== FOOTER ========== -->
-  <footer>
-    <p>Copyright &copy; 2010-2022 * Travel Agency "Itchy Feet"</p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+    <p>Copyright © 2010-2022 * Travel Agency "Itchy Feet"</p>
+</footer>
 
 </body>
 </html>
